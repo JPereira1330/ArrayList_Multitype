@@ -6,6 +6,6 @@
 
 struct line{
     int type;
-    void* valor;
-    struct line next;
+    void *valor;
+    struct line *next;
 };
