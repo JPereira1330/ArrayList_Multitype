@@ -22,6 +22,14 @@ LINE new_arraylist(){
 
 LINE add_arraylist( LINE al, void* valor, int type ){
     
+    if( al == NULL ){
+        al = new_arraylist();
+        al->valor = valor;
+        al->type = type;
+        al->next = NULL;
+        return al;
+    }
+    
     if( al->next != NULL ){
         al->next = add_arraylist(al->next, valor, type);
     }
