@@ -15,7 +15,7 @@ LINE new_arraylist(){
         return NULL;
     }
     
-    //memset(al, 0, sizeof(struct line));
+    memset(al, 0, sizeof(al));
     
     return al;
 }
@@ -90,6 +90,6 @@ LINE erase_arraylist( LINE al ){
         return erase_arraylist(al->next);
     }
     
-    //memset(arraylist, 0, sizeof(struct line));
+    memset(al, 0, sizeof(al));
     return 0;
 }
