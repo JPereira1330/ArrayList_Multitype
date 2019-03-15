@@ -2,102 +2,65 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "type_line.h"
+#include "typeline.h"
 #include "arraylist.h"
 
-LINE new_arraylist(){
+LINE addLine(LINE al, LINE new){
     
-    LINE al;
-    
-    al = (LINE) malloc( sizeof(al) );
-    
-    if( al == NULL ){
-        return NULL;
-    }
-    
-    memset(al, 0, sizeof(al));
-    
-    return al;
-}
-
-LINE add_arraylist( LINE al, void* valor, int type ){
-    
-    if( al == NULL ){
-        al = new_arraylist();
-        al->valor = valor;
-        al->type = type;
-        al->next = NULL;
+    if(getLineNext(al) != NULL){
+        al = setLineNext(al, addLine(getLineNext(al), new));
         return al;
     }
     
-    if( al->next != NULL ){
-        al->next = add_arraylist(al->next, valor, type);
-    }
-
-    al->next = new_arraylist();
-    al->next->valor = valor;
-    al->next->type = type;
-    al->next->next = NULL;
+    al = setLineNext(al, new);
     
     return al;
 }
 
-LINE get_arraylist ( LINE al, int pos ){
+void printLine(LINE al){    
     
-    void *value;
-    
-    for(int i = 0; i < pos; i++){
-        value = get_arraylist(al->next, pos);
-    }
-    
-    return value;
-}
-
-void print_arraylist ( LINE al ){
-    
-    do{
-        switch( al->type ){
+     do{
+        switch( getLineType(al) ){
             case 1:
-                printf(" [ INT ] \t%d", al->valor);
+                printf(" [ %d INT    ] \t%d\n",getLineType(al), getLineValue(al));
                 break;
             case 2:
-                printf(" [ FLOAT ] \t%d", al->valor);
+                printf(" [ %d FLOAT  ] \t%d\n",getLineType(al), getLineValue(al));
                 break;
             case 3:
-                printf(" [ DOUBLE ] \t%d", al->valor);
+                printf(" [ %d DOUBLE ] \t%d\n",getLineType(al), getLineValue(al));
                 break;
             case 4:
-                printf(" [ CHAR ] \t%c", al->valor);
+                printf(" [ %d CHAR   ] \t%c\n",getLineType(al), getLineValue(al));
                 break;
             case 5:
-                printf(" [ STRING ] \t%s", al->valor);
+                printf(" [ %d STRING ] \t%s\n",getLineType(al), getLineValue(al));
                 break;
         }
         
-        al = al->next;
-    }while(al->next != NULL);
+        al = getLineNext(al);
+    }while(al != NULL);
     
 }
 
-LINE clear_arraylist( LINE al ){
+int getLineSize(LINE al){
     
-    if( al->next != NULL ){
-        return clear_arraylist(al->next);
+    int cont = 0;
+    
+    do{
+        cont++;
+        al = getLineNext(al);
+    }while(al != NULL);
+    
+}
+
+LINE clearLine(LINE al){
+    
+    if(getLineNext(al) != NULL){
+        clearLine(getLineNext(al));
     }
     
-    al->next = NULL;
-    al->type = NULL;
-    al->valor = NULL;
+    memset(al, 0, sizeof( getLineSizeOf() ));
     
     return al;
-}
-
-LINE erase_arraylist( LINE al ){
-    
-    if( al->next != NULL ){
-        return erase_arraylist(al->next);
-    }
-    
-    memset(al, 0, sizeof(al));
-    return 0;
 }

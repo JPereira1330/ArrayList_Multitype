@@ -2,7 +2,7 @@
  * File:   arraylist.h
  * Author: José C. Pereira
  *
- * Created on 24 de Fevereiro de 2019, 11:00
+ * Created on 14 de Março de 2019, 08:58
  */
 
 #ifndef ARRAYLIST_H
@@ -11,46 +11,18 @@
 #ifdef	__cplusplus
 extern "C" {
 #endif
+
+    LINE addLine(LINE al, LINE new);
     
-    /**
-     * @brief Inicia uma nova lista
-     * @return      Retorna NULL em caso de erro
-     */
-    LINE new_arraylist();
+    void printLine(LINE al);
     
-    /**
-     * @brief Adiciona um novo valor na arraylist
-     * @param type  O tipo do valor já pré-definido numa constante Ex: type_int
-     * @return      A nova arraylist com o novo valor adicionado
-     */
-    LINE add_arraylist( LINE al, void* valor, int type );
+    int getLineSize(LINE al);
     
-    /**
-     * 
-     * @param arraylist
-     */
-    void print_arraylist ( LINE al );
-    
-    /**
-     * @brief Retorna valor numa determinada posição ( 1ª Valor na posição 0 )
-     * @return      o valor da posição informada
-     */
-    LINE get_arraylist ( LINE al, int pos );
-    
-    /**
-     * @brief Deleta todos os valores da arraylist
-     * @return      arraylist limpa (NULL)
-     */
-    LINE clear_arraylist( LINE al );
-    
-    /**
-     * @brief Deleta todos os valores na arraylist e reseta da memoria
-     * @return      arraylist limpa (NULL)
-     */
-    LINE erase_arraylist( LINE al );
+    LINE clearLine(LINE al);
 
 #ifdef	__cplusplus
 }
 #endif
 
 #endif	/* ARRAYLIST_H */
+
